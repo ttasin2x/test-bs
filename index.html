@@ -28,6 +28,8 @@
 </head>
 <body>
     <div class="noise-overlay"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <div id="preloader">
         <div class="scout-loader">
@@ -43,7 +45,7 @@
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-center relative z-50">
                 <div class="flex items-center gap-2 cursor-pointer float-anim" onclick="window.open('https://www.scouts.gov.bd/', '_blank')">
-                    <img src="photos/scout-logo.webp" alt="BD Scouts Logo" class="w-10 h-10 drop-shadow-md">
+                    <img src="photos/scout-logo.webp" alt="BD Scouts Logo" class="w-10 h-10 drop-shadow-md cursor-none">
                     <span class="text-xl font-bold gradient-text-green font-display drop-shadow-sm pt-1">বাংলাদেশ স্কাউটস</span>
                 </div>
                 <div class="hidden lg:flex space-x-6 text-sm font-bold">
@@ -70,14 +72,14 @@
 
     <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <div class="absolute inset-0 z-0 opacity-30">
-            <div class="absolute top-20 right-[15%] w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-2xl float-anim parallax-bg" data-speed="0.4"></div>
-            <div class="absolute top-40 left-[15%] w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-2xl float-anim-delayed parallax-bg" data-speed="-0.2"></div>
-            <div class="absolute bottom-10 left-1/2 w-48 h-48 bg-red-200 rounded-full mix-blend-multiply filter blur-xl float-slow parallax-bg" data-speed="0.15"></div>
+            <div class="absolute top-20 right-[15%] w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-[60px] float-anim parallax-bg" data-speed="0.4"></div>
+            <div class="absolute top-40 left-[15%] w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-[60px] float-anim-delayed parallax-bg" data-speed="-0.2"></div>
+            <div class="absolute bottom-10 left-1/2 w-48 h-48 bg-red-200 rounded-full mix-blend-multiply filter blur-[40px] float-slow parallax-bg" data-speed="0.15"></div>
         </div>
 
         <div class="container mx-auto px-6 z-10 text-center mt-8">
             <div class="inline-block mb-6 gsap-reveal hero-element cursor-pointer" onclick="window.open('https://www.scouts.gov.bd/', '_blank')">
-                <img src="photos/scout-logo.webp" alt="Logo" class="w-28 h-28 mx-auto drop-shadow-xl animate-float">
+                <img src="photos/scout-logo.webp" alt="Logo" class="w-28 h-28 mx-auto drop-shadow-xl animate-float cursor-none">
             </div>
             
             <h1 id="dyn-hero-title" class="text-4xl md:text-5xl lg:text-7xl font-bold mb-3 font-display gradient-text-green drop-shadow-md gsap-reveal hero-element tracking-tight">বাংলাদেশ স্কাউটস</h1>
@@ -97,7 +99,7 @@
             </div>
 
             <div class="gsap-reveal hero-element">
-                <a href="#itihas" class="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-800 text-white px-8 py-3.5 rounded-full font-bold text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group">
+                <a href="#itihas" class="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-800 text-white px-8 py-3.5 rounded-full font-bold text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group cursor-none">
                     <span class="absolute inset-0 w-full h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-[shimmer_1s_forwards]"></span>
                     ইতিহাস অন্বেষণ করুন
                     <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
@@ -108,7 +110,7 @@
 
     <section class="py-16 bg-white relative z-20 shadow-[0_-15px_30px_rgba(0,0,0,0.02)] rounded-t-[2rem]">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 max-w-5xl mx-auto cursor-none">
                 <div class="stat-box gsap-stagger"><div class="stat-box-inner"><div id="dyn-stat-1" class="text-4xl font-bold mb-1 counter drop-shadow-md font-display" data-target="1972">০</div><div class="text-xs font-bold opacity-95 tracking-wide uppercase">প্রতিষ্ঠার সাল</div></div></div>
                 <div class="stat-box gsap-stagger"><div class="stat-box-inner delay-1"><div id="dyn-stat-2" class="text-4xl font-bold mb-1 counter drop-shadow-md font-display" data-target="1974">০</div><div class="text-xs font-bold opacity-95 tracking-wide uppercase">WOSM স্বীকৃতি</div></div></div>
                 <div class="stat-box gsap-stagger"><div class="stat-box-inner delay-2"><div id="dyn-stat-3" class="text-4xl font-bold mb-1 drop-shadow-md font-display">২২.৬</div><div class="text-xs font-bold opacity-95 tracking-wide uppercase">লাখ সদস্য</div></div></div>
@@ -124,7 +126,7 @@
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">স্কাউটিংয়ের ইতিহাস</h2>
                 <p class="text-gray-600 text-base mt-3 font-medium">বিশ্ব স্কাউটিং থেকে স্বাধীন বাংলাদেশ এবং বর্তমান</p>
             </div>
-            <div class="timeline-container max-w-4xl mx-auto relative">
+            <div class="timeline-container max-w-4xl mx-auto relative cursor-none">
                 <div class="timeline-line-bg"></div>
                 <div class="timeline-line-fill" id="animatedTimelineLine"></div>
                 <div id="dynamic-history"></div>
@@ -132,7 +134,7 @@
         </div>
     </section>
 
-    <section id="netritto" class="py-24 bg-[#eef8f5] relative border-t border-green-100">
+    <section id="netritto" class="py-24 bg-[#eef8f5] relative border-t border-green-100 cursor-none">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">স্মরণীয় ব্যক্তিবর্গ ও নেতৃত্ব</h2>
@@ -142,7 +144,7 @@
         </div>
     </section>
 
-    <section id="mulniti" class="py-24 bg-white relative border-t border-b border-green-100">
+    <section id="mulniti" class="py-24 bg-white relative border-t border-b border-green-100 cursor-none">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">মূলনীতি ও আইন</h2>
@@ -185,7 +187,7 @@
         </div>
     </section>
 
-    <section id="shakha" class="py-24 bg-white relative">
+    <section id="shakha" class="py-24 bg-white relative cursor-none">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">স্কাউট শাখাসমূহ</h2>
@@ -195,7 +197,7 @@
         </div>
     </section>
 
-    <section id="jamboree" class="py-24 bg-[#eef8f5] relative border-t border-green-100">
+    <section id="jamboree" class="py-24 bg-[#eef8f5] relative border-t border-green-100 cursor-none">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">জাতীয় জাম্বোরি সমূহ</h2>
@@ -220,7 +222,7 @@
         </div>
     </section>
 
-    <section id="poricalona" class="py-24 bg-white relative overflow-hidden">
+    <section id="poricalona" class="py-24 bg-white relative overflow-hidden cursor-none">
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">সাংগঠনিক কাঠামো ও দপ্তর</h2>
@@ -229,7 +231,7 @@
             <div class="mb-14 max-w-5xl mx-auto gsap-reveal">
                 <div class="glass-card-green p-6 md:p-8 rounded-3xl shadow-lg flex flex-col md:flex-row items-center gap-8 group hover:shadow-2xl transition-all">
                     <div class="w-full md:w-1/2 h-56 md:h-72 rounded-2xl overflow-hidden shadow-md cursor-pointer" onclick="window.open('https://www.scouts.gov.bd/', '_blank')">
-                        <img src="photos/scout-bhaban.webp" loading="lazy" alt="National Scout Bhaban" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <img src="photos/scout-bhaban.webp" loading="lazy" alt="National Scout Bhaban" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 cursor-none">
                     </div>
                     <div class="w-full md:w-1/2 text-left">
                         <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1.5 rounded-full mb-3 inline-block shadow-sm">জাতীয় সদর দপ্তর</span>
@@ -238,7 +240,7 @@
                         <div class="bg-white/70 p-4 rounded-xl border border-green-100 shadow-sm">
                             <div class="text-green-800 font-bold text-sm flex flex-col md:flex-row md:items-center gap-2">
                                 <span><span class="text-xl">📍</span> ৬০, আঞ্জুমান মুফিদুল ইসলাম রোড, কাকরাইল, ঢাকা-১০০০</span>
-                                <a href="https://www.google.com/maps/search/Bangladesh+Scouts+National+Headquarters" target="_blank" class="inline-flex items-center gap-1.5 bg-green-100 hover:bg-green-200 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full transition-colors mt-2 md:mt-0 border border-green-200 shadow-sm w-max">
+                                <a href="https://www.google.com/maps/search/Bangladesh+Scouts+National+Headquarters" target="_blank" class="inline-flex items-center gap-1.5 bg-green-100 hover:bg-green-200 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full transition-colors cursor-none mt-2 md:mt-0 border border-green-200 shadow-sm w-max">
                                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                                     ম্যাপে দেখুন
                                 </a>
@@ -328,7 +330,7 @@
         </div>
     </section>
 
-    <section id="regions" class="py-24 bg-[#eef8f5] relative">
+    <section id="regions" class="py-24 bg-[#eef8f5] relative cursor-none">
         <div class="container mx-auto px-6">
             <div class="text-center mb-10 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">স্কাউট অঞ্চল সমূহ</h2>
@@ -407,7 +409,7 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-display">জাতীয় প্রশিক্ষণ কেন্দ্র</h3>
                         <p class="text-green-700 font-bold mb-2 text-xs bg-green-100 inline-block px-3 py-1 rounded-full mx-auto">মৌচাক, গাজীপুর</p>
                         <p class="text-gray-700 text-sm font-medium mt-1 mb-4 flex-1">সারাদেশের স্কাউট লিডারদের উচ্চতর প্রশিক্ষণ প্রদান করা হয়।</p>
-                        <a href="https://www.google.com/maps/search/National+Scout+Training+Centre+Mouchak" target="_blank" class="inline-flex items-center justify-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold px-4 py-1.5 rounded-full transition-colors border border-gray-200 mx-auto">
+                        <a href="https://www.google.com/maps/search/National+Scout+Training+Centre+Mouchak" target="_blank" class="inline-flex items-center justify-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold px-4 py-1.5 rounded-full transition-colors cursor-none border border-gray-200 mx-auto">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             লোকেশন দেখুন
                         </a>
@@ -423,7 +425,7 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-display">রোভার প্রশিক্ষণ কেন্দ্র</h3>
                         <p class="text-red-700 font-bold mb-2 text-xs bg-red-100 inline-block px-3 py-1 rounded-full mx-auto">বাহাদুরপুর, গাজীপুর</p>
                         <p class="text-gray-700 text-sm font-medium mt-1 mb-4 flex-1">রোভার স্কাউটদের বিশেষায়িত প্রশিক্ষণ ও মুট আয়োজনের মূল কেন্দ্র।</p>
-                        <a href="https://www.google.com/maps/search/Rover+Scout+Training+Centre+Bahadurpur" target="_blank" class="inline-flex items-center justify-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold px-4 py-1.5 rounded-full transition-colors border border-gray-200 mx-auto">
+                        <a href="https://www.google.com/maps/search/Rover+Scout+Training+Centre+Bahadurpur" target="_blank" class="inline-flex items-center justify-center gap-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-[11px] font-bold px-4 py-1.5 rounded-full transition-colors cursor-none border border-gray-200 mx-auto">
                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                             লোকেশন দেখুন
                         </a>
@@ -461,28 +463,28 @@
             <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <div class="activity-card gsap-stagger group border border-blue-100 flex flex-col">
                     <div class="h-48 overflow-hidden relative cursor-pointer" onclick="openModal('photos/mop.webp')">
-                        <img src="photos/mop.webp" loading="lazy" alt="Messengers of Peace" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="photos/mop.webp" loading="lazy" alt="Messengers of Peace" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-none">
                         <div class="absolute inset-0 bg-black/10 mix-blend-overlay pointer-events-none"></div>
                     </div>
                     <div class="p-6 bg-white text-center flex flex-col flex-1">
                         <span class="text-xs font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full mb-3 inline-block shadow-sm border border-blue-100 mx-auto">MoP গ্লোবাল নেটওয়ার্ক</span>
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-display">ম্যাসেঞ্জারস অফ পিস</h3>
                         <p class="text-gray-700 text-sm font-medium leading-relaxed px-4 flex-1 mb-4">বিশ্বব্যাপী শান্তি, সম্প্রীতি ও ভ্রাতৃত্ববোধ রক্ষায় এবং সমাজে ইতিবাচক পরিবর্তন আনতে স্কাউটদের বিশেষ উদ্যোগ।</p>
-                        <a id="dyn-link-mop" href="https://www.scout.org/messengers-of-peace" target="_blank" class="inline-flex items-center justify-center gap-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold px-5 py-2 rounded-full transition-colors border border-blue-200 mx-auto w-max">
+                        <a id="dyn-link-mop" href="https://www.scout.org/messengers-of-peace" target="_blank" class="inline-flex items-center justify-center gap-1 bg-blue-50 hover:bg-blue-100 text-blue-700 text-[11px] font-bold px-5 py-2 rounded-full transition-colors cursor-none border border-blue-200 mx-auto w-max">
                             বিস্তারিত জানুন
                         </a>
                     </div>
                 </div>
                 <div class="activity-card gsap-stagger group border border-green-100 flex flex-col">
                     <div class="h-48 overflow-hidden relative cursor-pointer" onclick="openModal('photos/ttl.webp')">
-                        <img src="photos/ttl.webp" loading="lazy" alt="Ticket To Life" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="photos/ttl.webp" loading="lazy" alt="Ticket To Life" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-none">
                         <div class="absolute inset-0 bg-black/10 mix-blend-overlay pointer-events-none"></div>
                     </div>
                     <div class="p-6 bg-white text-center flex flex-col flex-1">
                         <span class="text-xs font-bold text-green-700 bg-green-50 px-3 py-1.5 rounded-full mb-3 inline-block shadow-sm border border-green-100 mx-auto">এপিআর প্রজেক্ট</span>
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-display">টিকিট টু লাইফ (TTL)</h3>
                         <p class="text-gray-700 text-sm font-medium leading-relaxed px-4 flex-1 mb-4">পথশিশু ও সুবিধাবঞ্চিত শিশুদের স্কাউটিংয়ের মাধ্যমে শিক্ষা ও বৃত্তিমূলক প্রশিক্ষণ দিয়ে সমাজের মূলধারায় ফিরিয়ে আনা।</p>
-                        <a id="dyn-link-ttl" href="https://sdgs.scout.org/" target="_blank" class="inline-flex items-center justify-center gap-1 bg-green-50 hover:bg-green-100 text-green-700 text-[11px] font-bold px-5 py-2 rounded-full transition-colors border border-green-200 mx-auto w-max">
+                        <a id="dyn-link-ttl" href="https://sdgs.scout.org/" target="_blank" class="inline-flex items-center justify-center gap-1 bg-green-50 hover:bg-green-100 text-green-700 text-[11px] font-bold px-5 py-2 rounded-full transition-colors cursor-none border border-green-200 mx-auto w-max">
                             বিস্তারিত জানুন
                         </a>
                     </div>
@@ -491,7 +493,7 @@
         </div>
     </section>
 
-    <section id="sommanona" class="py-24 bg-[#002f23] text-white relative overflow-hidden">
+    <section id="sommanona" class="py-24 bg-[#002f23] text-white relative overflow-hidden cursor-none">
         <div class="absolute inset-0 opacity-[0.03]">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="a" patternUnits="userSpaceOnUse" width="40" height="40"><path d="M20 0l20 20-20 20L0 20z" fill="none" stroke="#ffffff" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#a)"/></svg>
         </div>
@@ -515,7 +517,7 @@
                     <div class="shining-badge w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-white/30 shadow-[0_0_20px_rgba(34,197,94,0.6)]">
                         <img src="photos/ps.webp" loading="lazy" alt="President Scout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <h3 class="text-lg font-bold mb-2 font-display text-white">প্রেসিডেন্ট's স্কাউট (PS)</h3>
+                    <h3 class="text-lg font-bold mb-2 font-display text-white">প্রেসিডেন্ট'স স্কাউট (PS)</h3>
                     <p class="text-green-100 text-xs font-medium leading-relaxed">স্কাউট শাখার সর্বোচ্চ সম্মাননা। দক্ষতা ও সমাজসেবার অনন্য স্বীকৃতির জন্য দেওয়া হয়।</p>
                 </div>
                 
@@ -523,7 +525,7 @@
                     <div class="shining-badge w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-white/30 shadow-[0_0_20px_rgba(239,68,68,0.6)]">
                         <img src="photos/prs.webp" loading="lazy" alt="President Rover Scout" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <h3 class="text-lg font-bold mb-2 font-display text-white">প্রেসিডেন্ট's রোভার</h3>
+                    <h3 class="text-lg font-bold mb-2 font-display text-white">প্রেসিডেন্ট'স রোভার</h3>
                     <p class="text-red-100 text-xs font-medium leading-relaxed">রোভারদের সর্বোচ্চ স্বীকৃতি (PRS)। কঠোর পরিশ্রম ও সেবার মাধ্যমে এটি অর্জন করতে হয়।</p>
                 </div>
                 
@@ -538,7 +540,7 @@
         </div>
     </section>
 
-    <section class="py-24 bg-white relative overflow-hidden">
+    <section class="py-24 bg-white relative overflow-hidden cursor-none">
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">আন্তর্জাতিক অংশগ্রহণ</h2>
@@ -597,7 +599,7 @@
         </div>
     </section>
 
-    <section id="bhobisshot" class="py-24 relative bg-[#eef8f5] border-t border-green-100">
+    <section id="bhobisshot" class="py-24 relative bg-[#eef8f5] border-t border-green-100 cursor-none">
         <div class="container mx-auto px-6">
             <div class="max-w-5xl mx-auto text-center gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-4">ভবিষ্যৎ পরিকল্পনা</h2>
@@ -627,13 +629,13 @@
         <div class="container mx-auto px-6 text-center">
             <h3 class="text-2xl font-bold font-display text-gray-800 mb-8">গুরুত্বপূর্ণ লিংক ও সার্ভিস পোর্টাল</h3>
             <div class="flex flex-wrap justify-center gap-5">
-                <a id="dyn-link-fb" href="https://www.facebook.com/share/1FJHbYaF5v/" target="_blank" class="flex items-center gap-3 bg-[#1877F2] text-white px-8 py-3.5 rounded-full hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold">
+                <a id="dyn-link-fb" href="https://www.facebook.com/share/1FJHbYaF5v/" target="_blank" class="flex items-center gap-3 bg-[#1877F2] text-white px-8 py-3.5 rounded-full hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold cursor-none">
                     ফেইসবুক পেজ
                 </a>
-                <a id="dyn-link-group" href="https://www.facebook.com/groups/bangladeshscouts.nhq/?ref=share&mibextid=NSMWBT" target="_blank" class="flex items-center gap-3 bg-[#1877F2] text-white px-8 py-3.5 rounded-full hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold">
+                <a id="dyn-link-group" href="https://www.facebook.com/groups/bangladeshscouts.nhq/?ref=share&mibextid=NSMWBT" target="_blank" class="flex items-center gap-3 bg-[#1877F2] text-white px-8 py-3.5 rounded-full hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold cursor-none">
                     ফেইসবুক গ্রুপ
                 </a>
-                <a id="dyn-link-bsid" href="https://service.scouts.gov.bd/login" target="_blank" class="flex items-center gap-3 bg-green-600 text-white px-8 py-3.5 rounded-full hover:bg-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold">
+                <a id="dyn-link-bsid" href="https://service.scouts.gov.bd/login" target="_blank" class="flex items-center gap-3 bg-green-600 text-white px-8 py-3.5 rounded-full hover:bg-green-700 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 font-bold cursor-none">
                     BS ID লগইন
                 </a>
             </div>
@@ -653,25 +655,25 @@
         </div>
     </div>
 
-    <footer class="bg-[#111827] text-gray-300 py-5 border-t-[3px] border-green-700 overflow-hidden">
+    <footer class="bg-[#002f23]/50 backdrop-blur-xl text-gray-200 py-5 border-t-[2px] border-green-500/30 overflow-hidden shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
         <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 max-w-6xl mx-auto cursor-none">
                 
                 <div class="flex items-center gap-3 group cursor-pointer" onclick="window.open('https://www.scouts.gov.bd/', '_blank')">
-                    <img src="photos/scout-logo.webp" loading="lazy" alt="Logo" class="w-8 h-8 opacity-90 drop-shadow-md group-hover:scale-110 transition-transform">
+                    <img src="photos/scout-logo.webp" loading="lazy" alt="Logo" class="w-8 h-8 opacity-90 drop-shadow-md group-hover:scale-110 transition-transform cursor-none">
                     <div class="text-left flex flex-col justify-center">
                         <div class="flex items-center gap-2">
                             <h4 class="text-white font-bold text-base leading-none font-display tracking-wide mt-1">বাংলাদেশ স্কাউটস</h4>
                             <span class="bg-red-500/20 text-red-400 text-[8px] font-bold px-1.5 py-0.5 rounded border border-red-500/30 tracking-wider">UN-OFFICIAL</span>
                         </div>
-                        <p class="text-[10px] text-gray-400 font-medium mt-1 tracking-wide">© ২০২৬ | ডেভলপার: <a href="https://ttasin2x-droid.github.io/Tanvir-Tasin-Portfolio-/" target="_blank" class="text-green-400 hover:text-green-300 transition-colors font-bold text-[13px]" onclick="event.stopPropagation()">Tanvir Tasin</a></p>
-                        <p class="text-[10px] text-gray-400 font-medium mt-0.5 tracking-wide flex items-center gap-1">যেকোনো প্রশ্ন বা যোগাযোগে <a href="https://wa.me/8801533327033" target="_blank" class="text-[#25D366] hover:text-green-400 transition-colors font-bold flex items-center gap-1" onclick="event.stopPropagation()"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.386 0 12.031c0 2.112.553 4.185 1.603 6.007L.18 24l6.113-1.604A11.964 11.964 0 0012.031 24c6.646 0 12.03-5.386 12.03-12.031C24.061 5.386 18.677 0 12.031 0zm0 22.001c-1.801 0-3.565-.483-5.115-1.401l-.367-.217-3.8.997 1.015-3.705-.238-.378A9.974 9.974 0 012 12.031c0-5.534 4.502-10.035 10.031-10.035 5.53 0 10.03 4.501 10.03 10.035 0 5.533-4.5 10.03-10.03 10.03zm5.488-7.466c-.301-.151-1.782-.879-2.059-.98-.277-.101-.479-.151-.68.151-.202.302-.781.98-.957 1.181-.176.202-.352.227-.653.076-.302-.151-1.272-.469-2.422-1.494-.895-.796-1.5-1.778-1.676-2.08-.177-.301-.019-.464.132-.615.136-.135.302-.352.453-.528.151-.176.202-.302.302-.503.1-.202.05-.378-.025-.529-.076-.151-.68-1.641-.932-2.247-.246-.59-.496-.51-.68-.519-.176-.008-.378-.008-.58-.008s-.529.076-.806.378c-.277.302-1.058 1.034-1.058 2.519s1.083 2.919 1.234 3.12c.151.202 2.126 3.245 5.15 4.549.72.311 1.282.496 1.721.635.723.23 1.382.197 1.902.12.582-.086 1.782-.729 2.034-1.433.252-.704.252-1.307.176-1.433-.076-.126-.277-.202-.579-.353z"/></svg> হোয়াটসঅ্যাপ করুন</a></p>
+                        <p class="text-[10px] text-gray-400 font-medium mt-1 tracking-wide">© ২০২৬ | ডেভলপার: <a href="https://ttasin2x-droid.github.io/Tanvir-Tasin-Portfolio-/" target="_blank" class="text-green-400 hover:text-green-300 transition-colors font-bold text-[13px] cursor-none" onclick="event.stopPropagation()">Tanvir Tasin</a></p>
+                        <p class="text-[10px] text-gray-400 font-medium mt-0.5 tracking-wide flex items-center gap-1">যেকোনো প্রশ্ন বা যোগাযোগে <a href="https://wa.me/8801533327033" target="_blank" class="text-[#25D366] hover:text-green-400 transition-colors font-bold flex items-center gap-1 cursor-none" onclick="event.stopPropagation()"><svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 0 5.386 0 12.031c0 2.112.553 4.185 1.603 6.007L.18 24l6.113-1.604A11.964 11.964 0 0012.031 24c6.646 0 12.03-5.386 12.03-12.031C24.061 5.386 18.677 0 12.031 0zm0 22.001c-1.801 0-3.565-.483-5.115-1.401l-.367-.217-3.8.997 1.015-3.705-.238-.378A9.974 9.974 0 012 12.031c0-5.534 4.502-10.035 10.031-10.035 5.53 0 10.03 4.501 10.03 10.035 0 5.533-4.5 10.03-10.03 10.03zm5.488-7.466c-.301-.151-1.782-.879-2.059-.98-.277-.101-.479-.151-.68.151-.202.302-.781.98-.957 1.181-.176.202-.352.227-.653.076-.302-.151-1.272-.469-2.422-1.494-.895-.796-1.5-1.778-1.676-2.08-.177-.301-.019-.464.132-.615.136-.135.302-.352.453-.528.151-.176.202-.302.302-.503.1-.202.05-.378-.025-.529-.076-.151-.68-1.641-.932-2.247-.246-.59-.496-.51-.68-.519-.176-.008-.378-.008-.58-.008s-.529.076-.806.378c-.277.302-1.058 1.034-1.058 2.519s1.083 2.919 1.234 3.12c.151.202 2.126 3.245 5.15 4.549.72.311 1.282.496 1.721.635.723.23 1.382.197 1.902.12.582-.086 1.782-.729 2.034-1.433.252-.704.252-1.307.176-1.433-.076-.126-.277-.202-.579-.353z"/></svg> হোয়াটসঅ্যাপ করুন</a></p>
                     </div>
                 </div>
                 
                 <div class="text-center md:text-right max-w-lg mt-1 md:mt-0">
                     <p class="text-[11px] text-gray-400 font-medium leading-relaxed">
-                        <span class="text-yellow-500 font-bold">Disclaimer:</span> এটি একটি এডুকেশনাল প্রজেক্ট। সমস্ত তথ্য <a href="https://www.scouts.gov.bd/" target="_blank" class="text-green-400 hover:text-green-300 underline underline-offset-2 font-bold" onclick="event.stopPropagation()">scouts.gov.bd</a> থেকে সংগৃহীত।
+                        <span class="text-yellow-500 font-bold">Disclaimer:</span> এটি একটি এডুকেশনাল প্রজেক্ট। সমস্ত তথ্য <a href="https://www.scouts.gov.bd/" target="_blank" class="text-green-400 hover:text-green-300 underline underline-offset-2 cursor-none font-bold" onclick="event.stopPropagation()">scouts.gov.bd</a> থেকে সংগৃহীত।
                     </p>
                 </div>
 
@@ -679,11 +681,11 @@
         </div>
     </footer>
 
-    <button id="backToTop" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-600 to-green-800 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:scale-110 hover:-translate-y-1">
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-600 to-green-800 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 cursor-none">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
     </button>
 
-    <div id="progress-wrap" class="progress-wrap fixed bottom-6 right-6 w-[48px] h-[48px] rounded-full shadow-xl z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:scale-110 hover:-translate-y-1">
+    <div id="progress-wrap" class="progress-wrap fixed bottom-6 right-6 w-[48px] h-[48px] rounded-full shadow-xl z-50 opacity-0 pointer-events-none transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 cursor-none">
         <svg class="progress-circle absolute inset-0 w-full h-full" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"></path>
         </svg>
@@ -694,7 +696,7 @@
 
     <div id="imageModal" class="fixed inset-0 z-[9999999] hidden bg-black/90 backdrop-blur-md flex items-center justify-center opacity-0 transition-opacity duration-300 cursor-pointer" onclick="closeModal()">
         <span class="absolute top-6 right-8 text-white text-4xl font-bold hover:text-red-500 transition-colors">×</span>
-        <img id="modalImage" src="" class="max-w-[90%] max-h-[90vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300">
+        <img id="modalImage" src="" class="max-w-[90%] max-h-[90vh] object-contain rounded-xl shadow-2xl transform scale-95 transition-transform duration-300 cursor-none">
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
