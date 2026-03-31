@@ -59,25 +59,6 @@
                         <a href="#jamboree" class="nav-link text-gray-800 hover:text-green-700 transition-colors">জাম্বোরি</a>
                         <a href="#prokashona" class="nav-link text-gray-800 hover:text-green-700 transition-colors">প্রকাশনা</a>
                     </div>
-                    
-                    <div class="relative">
-                        <button onclick="document.getElementById('visitorDropdown').classList.toggle('opacity-0'); document.getElementById('visitorDropdown').classList.toggle('invisible'); document.getElementById('visitorDropdown').classList.toggle('translate-y-[-10px]');" class="text-gray-800 hover:text-green-700 focus:outline-none p-1.5 rounded-full hover:bg-white/50 transition-colors relative z-50 cursor-none" title="ভিজিটর দেখুন">
-                            <svg class="w-6 h-6 drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                        </button>
-                        <div id="visitorDropdown" class="absolute right-0 top-full mt-3 w-max bg-white/95 backdrop-blur-xl border border-green-100 rounded-xl shadow-xl p-3 opacity-0 invisible transform translate-y-[-10px] transition-all duration-300 z-50 cursor-none">
-                            <p class="text-[11px] text-gray-800 font-bold mb-2 text-center border-b border-green-100 pb-1">মোট সাইট ভিজিটর</p>
-                            
-                            <div class="flex items-center justify-center rounded overflow-hidden shadow-sm font-display text-[13px] font-bold border border-gray-200 cursor-none">
-                                <div class="bg-[#111827] text-white px-2 py-1 flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                    Visits
-                                </div>
-                                <div class="bg-gradient-to-r from-[#006A4E] to-green-700 text-white px-3 py-1 tracking-widest min-w-[70px] text-center" id="real-visitor-count">
-                                    <span class="animate-pulse text-[10px]">লোড হচ্ছে...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <button id="mobileMenuBtn" class="lg:hidden text-green-700 focus:outline-none bg-green-50 p-2 rounded-lg relative z-50 cursor-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -114,8 +95,18 @@
                 <p id="typewriter-text" class="text-lg md:text-2xl text-green-800 font-bold font-display border-r-2 border-green-800 pr-1 typewriter-cursor"></p>
             </div>
 
-            <p id="dyn-hero-subtitle" class="text-lg md:text-xl text-gray-800 mb-10 max-w-2xl mx-auto font-display leading-relaxed gsap-reveal hero-element bg-white/50 p-3 rounded-xl backdrop-blur-sm border border-white/50 shadow-sm">স্বাধীনতার পর থেকে আজ পর্যন্ত—বাংলাদেশের বৃহত্তম যুব সংগঠনের গৌরবময় ইতিহাস ও ঐতিহ্যের পদযাত্রা</p>
+            <p id="dyn-hero-subtitle" class="text-lg md:text-xl text-gray-800 mb-6 max-w-2xl mx-auto font-display leading-relaxed gsap-reveal hero-element bg-white/50 p-3 rounded-xl backdrop-blur-sm border border-white/50 shadow-sm">স্বাধীনতার পর থেকে আজ পর্যন্ত—বাংলাদেশের বৃহত্তম যুব সংগঠনের গৌরবময় ইতিহাস ও ঐতিহ্যের পদযাত্রা</p>
             
+            <div class="inline-flex items-center justify-center gap-3 bg-white/40 backdrop-blur-md border border-white/60 shadow-sm rounded-full px-4 py-2 mb-10 gsap-reveal hero-element cursor-none relative overflow-hidden group">
+                <div class="flex items-center gap-2 text-green-800 font-bold text-sm font-display">
+                    <svg class="w-4 h-4 text-green-700 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    <span>মোট ভিজিটর:</span>
+                </div>
+                <div class="bg-gradient-to-r from-green-600 to-green-800 text-white px-3 py-1 rounded-full font-bold text-sm tracking-wider min-w-[80px] text-center shadow-inner" id="real-visitor-count">
+                    <span class="animate-pulse text-[11px]">লোড হচ্ছে...</span>
+                </div>
+            </div>
+
             <div class="flex flex-wrap justify-center gap-4 md:gap-5 mb-12 gsap-reveal hero-element z-20 relative">
                 <div class="hero-badge group"><div class="badge-icon text-xl md:text-2xl shadow-sm border border-gray-100 bg-white"><span class="drop-shadow-sm">🏛️</span></div><div class="badge-text"><span class="title">প্রতিষ্ঠিত</span><strong class="value">১৯৭২</strong></div></div>
                 <div class="hero-badge group"><div class="badge-icon text-xl md:text-2xl shadow-sm border border-gray-100 bg-white"><span class="drop-shadow-sm">🌍</span></div><div class="badge-text"><span class="title">WOSM সদস্য</span><strong class="value">১৯৭৪</strong></div></div>
