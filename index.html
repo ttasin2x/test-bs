@@ -66,7 +66,16 @@
                         </button>
                         <div id="visitorDropdown" class="absolute right-0 top-full mt-3 w-max bg-white/95 backdrop-blur-xl border border-green-100 rounded-xl shadow-xl p-3 opacity-0 invisible transform translate-y-[-10px] transition-all duration-300 z-50 cursor-none">
                             <p class="text-[11px] text-gray-800 font-bold mb-2 text-center border-b border-green-100 pb-1">মোট সাইট ভিজিটর</p>
-                            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fttasin2x-droid.github.io&count_bg=%23006A4E&title_bg=%23111827&icon=&icon_color=%23E7E7E7&title=Visits&edge_flat=false" alt="Visitor Count" class="mx-auto drop-shadow-sm rounded cursor-none">
+                            
+                            <div class="flex items-center justify-center rounded overflow-hidden shadow-sm font-display text-[13px] font-bold border border-gray-200 cursor-none">
+                                <div class="bg-[#111827] text-white px-2 py-1 flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                    Visits
+                                </div>
+                                <div class="bg-gradient-to-r from-[#006A4E] to-green-700 text-white px-3 py-1 tracking-widest min-w-[70px] text-center" id="real-visitor-count">
+                                    <span class="animate-pulse text-[10px]">লোড হচ্ছে...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -165,7 +174,7 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16 gsap-reveal">
                 <h2 class="text-3xl md:text-4xl font-bold font-display section-header gradient-text-green mb-3">মূলনীতি, আইন ও বৈশিষ্ট্য</h2>
-                <p class="text-gray-600 text-base mt-3 font-medium">একজন স্কাউটের চলার পথের চিরন্তন পাথেয়। বিশেষ বৈশিষ্ট্য: তিন আঙুলে সালাম, ডান হাত করমর্দন এবং সর্বদা স্কাউট পোশাক ও স্কার্ফ পরিধান।</p>
+                <p class="text-gray-600 text-base mt-3 font-medium">একজন স্কাউটের চলার পথের চিরন্তন পাথেয়। বিশেষ বৈশিষ্ট্য: তিন আঙুলে সালাম, ডান হাত করমর্দন এবং সর্বদা স্কাউট পোশাক ও স্কার্ফ পরিধান.</p>
             </div>
             <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
                 <div class="glass-card-green p-8 rounded-2xl gsap-stagger border-t-4 border-green-500 shadow-md flex flex-col bg-[#eef8f5]">
@@ -757,5 +766,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <script src="script.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const counterElement = document.getElementById('real-visitor-count');
+            try {
+                const response = await fetch('https://api.counterapi.dev/v1/ttasin2x-droid-github-io/scouts-site/up');
+                const data = await response.json();
+                
+                // আপনার দেওয়া 14977 এর সাথে লাইভ হিট যোগ করা হলো
+                const apiCount = data.count || data.value || 1;
+                const totalVisits = 14977 + apiCount; 
+                
+                // সংখ্যাগুলো বাংলায় কনভার্ট করা (যেমন: ১৪,৯৭৮)
+                const finalCountBn = totalVisits.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+                
+                // সুন্দর দেখানোর জন্য কমা (,) যুক্ত করা হলো
+                const formattedCount = finalCountBn.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                
+                counterElement.innerHTML = formattedCount;
+            } catch (error) {
+                console.error('Visitor Counter Error:', error);
+                // যদি কোনো কারণে API ডাউন থাকে, তবে ফলব্যাক হিসেবে অন্তত আপনার দেওয়া নম্বর দেখাবে
+                counterElement.innerHTML = '১৪,৯৭৭+';
+            }
+        });
+    </script>
 </body>
 </html>
