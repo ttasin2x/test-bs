@@ -104,24 +104,36 @@ function renderData(data) {
     }
 }
 
+// --------------------------------------------------------
+// Optimized Cursor Tracker (requestAnimationFrame)
+// --------------------------------------------------------
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+let cursorTicking = false;
+
 window.addEventListener('mousemove', (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
-    
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!cursorTicking) {
+        requestAnimationFrame(updateCursorPosition);
+        cursorTicking = true;
+    }
+});
+
+function updateCursorPosition() {
     if(cursorDot) {
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
     }
     if(cursorOutline) {
         cursorOutline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
+            transform: `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
         }, { duration: 300, fill: "forwards" });
     }
-});
+    cursorTicking = false;
+}
 
 document.addEventListener('mouseover', (e) => {
     if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
@@ -304,23 +316,54 @@ if(mobileMenuBtn && mobileMenu) {
     document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
 }
 
+// --------------------------------------------------------
+// Optimized Global Scroll Listener (requestAnimationFrame)
+// --------------------------------------------------------
+let isScrolling = false;
+let pathLength = 0; // for the circular progress
+
 window.addEventListener('scroll', () => {
-    const winScroll = document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    
-    const progress = document.getElementById('progressBar');
-    if(progress) progress.style.width = ((winScroll / height) * 100) + '%';
-    
-    const backToTop = document.getElementById('backToTop');
-    if(backToTop) {
-        if (winScroll > 400) backToTop.classList.remove('opacity-0', 'pointer-events-none');
-        else backToTop.classList.add('opacity-0', 'pointer-events-none');
-    }
-    
-    const navbar = document.getElementById('navbar');
-    if(navbar) {
-        if (winScroll > 30) { navbar.classList.add('shadow-md'); }
-        else { navbar.classList.remove('shadow-md'); }
+    if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            // 1. Line Progress Bar
+            const progress = document.getElementById('progressBar');
+            if(progress) progress.style.width = ((winScroll / height) * 100) + '%';
+            
+            // 2. Back To Top Button
+            const backToTop = document.getElementById('backToTop');
+            if(backToTop) {
+                if (winScroll > 400) backToTop.classList.remove('opacity-0', 'pointer-events-none');
+                else backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+            
+            // 3. Navbar Sticky Shadow
+            const navbar = document.getElementById('navbar');
+            if(navbar) {
+                if (winScroll > 30) { navbar.classList.add('shadow-md'); }
+                else { navbar.classList.remove('shadow-md'); }
+            }
+
+            // 4. Circular Progress Ring
+            const progressWrap = document.getElementById('progress-wrap');
+            const progressPath = document.querySelector('.progress-circle path');
+            if (progressWrap && progressPath && pathLength > 0) {
+                const scrollPercentage = winScroll / height;
+                const drawLength = pathLength * scrollPercentage;
+                progressPath.style.strokeDashoffset = pathLength - drawLength;
+
+                if (winScroll > 300) {
+                    progressWrap.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    progressWrap.classList.add('opacity-0', 'pointer-events-none');
+                }
+            }
+            
+            isScrolling = false;
+        });
+        isScrolling = true;
     }
 });
 
@@ -379,33 +422,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('DOMContentLoaded', () => {
     loadDynamicContent(); // Load content on ready
 
-    // Circular Scroll Progress Ring Logic
+    // Initialize Circular Progress Ring Length
     const progressWrap = document.getElementById('progress-wrap');
     const progressPath = document.querySelector('.progress-circle path');
-    let pathLength = 0;
     
     if (progressWrap && progressPath) {
         pathLength = progressPath.getTotalLength();
         progressPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
         progressPath.style.strokeDashoffset = pathLength;
-
-        window.addEventListener('scroll', () => {
-            const winScroll = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            
-            // Calculate stroke offset
-            const scrollPercentage = winScroll / height;
-            const drawLength = pathLength * scrollPercentage;
-            progressPath.style.strokeDashoffset = pathLength - drawLength;
-
-            // Show/Hide button
-            if (winScroll > 300) {
-                progressWrap.classList.remove('opacity-0', 'pointer-events-none');
-            } else {
-                progressWrap.classList.add('opacity-0', 'pointer-events-none');
-            }
-        });
-
         progressWrap.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
