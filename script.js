@@ -105,35 +105,33 @@ function renderData(data) {
 }
 
 // --------------------------------------------------------
-// Optimized Cursor Tracker (requestAnimationFrame)
+// Optimized Zero-Lag Cursor Tracker (LERP Method)
 // --------------------------------------------------------
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
-let cursorTicking = false;
+let outlineX = mouseX;
+let outlineY = mouseY;
 
 window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (!cursorTicking) {
-        requestAnimationFrame(updateCursorPosition);
-        cursorTicking = true;
-    }
 });
 
-function updateCursorPosition() {
+function renderCursor() {
     if(cursorDot) {
         cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
     }
     if(cursorOutline) {
-        cursorOutline.animate({
-            transform: `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`
-        }, { duration: 300, fill: "forwards" });
+        outlineX += (mouseX - outlineX) * 0.2;
+        outlineY += (mouseY - outlineY) * 0.2;
+        cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
     }
-    cursorTicking = false;
+    requestAnimationFrame(renderCursor);
 }
+requestAnimationFrame(renderCursor);
 
 document.addEventListener('mouseover', (e) => {
     if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
@@ -320,7 +318,7 @@ if(mobileMenuBtn && mobileMenu) {
 // Optimized Global Scroll Listener (requestAnimationFrame)
 // --------------------------------------------------------
 let isScrolling = false;
-let pathLength = 0; // for the circular progress
+let pathLength = 0;
 
 window.addEventListener('scroll', () => {
     if (!isScrolling) {
