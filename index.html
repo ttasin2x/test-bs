@@ -118,7 +118,7 @@
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4 gsap-reveal hero-element">
                 <a href="https://www.scout-world.com/" target="_blank" class="inline-flex items-center gap-2 bg-white text-green-800 border-2 border-green-700 px-8 py-2 rounded-full font-bold text-sm shadow-lg hover:shadow-xl hover:bg-green-50 transform hover:-translate-y-1.5 transition-all duration-300 cursor-none">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    Scout HandBook
+                    Scout HandBook Purchase
                 </a>
                 
                 <a href="#itihas" class="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-800 text-white px-8 py-3.5 rounded-full font-bold text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group cursor-none">
@@ -233,7 +233,7 @@
                     <div class="w-full md:w-1/2 text-left">
                         <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1.5 rounded-full mb-3 inline-block shadow-sm">জাতীয় সদর দপ্তর</span>
                         <h3 class="text-3xl font-bold text-gray-900 mb-3 font-display">জাতীয় স্কাউট ভবন</h3>
-                        <p class="text-gray-700 text-sm font-medium leading-relaxed mb-5">রাজধানীর কাকরাইলে অবস্থিত বাংলাদেশ স্কাউটসের প্রধান কার্যালয়। ২০ জন জাতীয় কমিশনার, ৪০ জন উপ-কমিশনার, ২০টি উচ্চপর্যায়ের জাতীয় কমিটি এবং ৬৯ জন প্রফেশনাল এক্সিকিউটিভের সমন্বয়ে এখান থেকেই সারাদেশের স্কাউটিং কার্যক্রম, নীতি-নির্ধারণ ও আন্তর্জাতিক যোগাযোগ পরিচালিত হয়।</p>
+                        <p class="text-gray-700 text-sm font-medium leading-relaxed mb-5">রাজধানীর কাকরাইলে অবস্থিত বাংলাদেশ স্কাউটসের প্রধান কার্যালয়। ২০ জন জাতীয় কমিশনার, ৪০ জন উপ-কমিশনার, ২০টি উচ্চপর্যায়ের জাতীয় কমিটি এবং ৬৯ জন প্রফেশনাল এক্সিকিউটিভের সমন্বয়ে এখান থেকেই সারাদেশের স্কাউটিং কার্যক্রম, নীতি-নির্ধারণ ও আন্তর্জাতিক যোগাযোগ পরিচালিত হয়。</p>
                         <div class="bg-gray-50 p-4 rounded-xl border border-green-100 shadow-sm">
                             <div class="text-green-800 font-bold text-sm flex flex-col md:flex-row md:items-center gap-2">
                                 <span><span class="text-xl">📍</span> ৬০, আঞ্জুমান মুফিদুল ইসলাম রোড, কাকরাইল, ঢাকা-১০০০</span>
@@ -763,30 +763,52 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <script src="script.js" defer></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const counterElement = document.getElementById('real-visitor-count');
-            try {
-                const response = await fetch('https://api.counterapi.dev/v1/ttasin2x-droid-github-io/scouts-site/up');
-                const data = await response.json();
-                
-                // আপনার দেওয়া 14977 এর সাথে লাইভ হিট যোগ করা হলো
-                const apiCount = data.count || data.value || 1;
-                const totalVisits = 14977 + apiCount; 
-                
-                // সংখ্যাগুলো বাংলায় কনভার্ট করা (যেমন: ১৪,৯৭৮)
-                const finalCountBn = totalVisits.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-                
-                // সুন্দর দেখানোর জন্য কমা (,) যুক্ত করা হলো
+    <script type="module">
+        // ফায়ারবেস লাইব্রেরি ইম্পোর্ট
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        // আপনার ফায়ারবেস কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyANTNiaoQ0_NY0dlNNPEvTbue0DO4HtmYM",
+            authDomain: "bd-scouts-website.firebaseapp.com",
+            databaseURL: "https://bd-scouts-website-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bd-scouts-website",
+            storageBucket: "bd-scouts-website.firebasestorage.app",
+            messagingSenderId: "69866491304",
+            appId: "1:69866491304:web:014d35e7c83928a7d7619d",
+            measurementId: "G-5BCLCTB1T0"
+        };
+
+        // ফায়ারবেস চালু করা
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const countRef = ref(db, 'visitorCount');
+        const counterElement = document.getElementById('real-visitor-count');
+
+        // ১. রিয়েল-টাইমে ডাটা দেখানো (ডাটাবেজে পরিবর্তন হলেই সাইটে আপডেট হবে)
+        onValue(countRef, (snapshot) => {
+            const data = snapshot.val();
+            if(data) {
+                // সংখ্যাগুলো বাংলায় কনভার্ট করা
+                const finalCountBn = data.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+                // কমা (,) যুক্ত করা
                 const formattedCount = finalCountBn.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                
                 counterElement.innerHTML = formattedCount;
-            } catch (error) {
-                console.error('Visitor Counter Error:', error);
-                // যদি কোনো কারণে API ডাউন থাকে, তবে ফলব্যাক হিসেবে অন্তত আপনার দেওয়া নম্বর দেখাবে
-                counterElement.innerHTML = '১৪,৯৭৭+';
             }
         });
+
+        // ২. নতুন ভিজিটর আসলে ডাটাবেজে ১ যোগ করা (ট্রানজেকশন মেথড)
+        setTimeout(() => {
+            runTransaction(countRef, (currentData) => {
+                if (currentData === null) {
+                    return 15977; // যদি ডাটাবেজ খালি থাকে
+                }
+                return currentData + 1;
+            }).catch((error) => {
+                console.error("Counter update failed: ", error);
+            });
+        }, 2000); // সাইট লোড হওয়ার ২ সেকেন্ড পর কাউন্ট করবে
     </script>
 </body>
 </html>
