@@ -56,19 +56,18 @@ html, body {
     padding-bottom: 5px;
 }
 
-/* Custom Cursor */
+/* Custom Cursor Updated */
 .cursor-dot, .cursor-outline {
     position: fixed; 
     top: 0; left: 0; 
-    transform: translate(-50%, -50%);
     border-radius: 50%; 
     z-index: 9999999; 
     pointer-events: none;
+    will-change: transform;
 }
 .cursor-dot { 
     width: 8px; height: 8px; 
     background-color: var(--bangladesh-red); 
-    transition: transform 0.1s; 
 }
 .cursor-outline { 
     width: 40px; height: 40px; 
@@ -372,4 +371,18 @@ footer { position: relative; overflow: hidden; }
     .md\:text-right .timeline-card { margin-left: 45px; text-align: left; }
     * { cursor: auto; }
     .cursor-dot, .cursor-outline { display: none; }
+}
+
+/* ========================================================
+   GPU HARDWARE ACCELERATION (PERFORMANCE FIX)
+   ======================================================== */
+.glass-card-green, .nav-green, .hero-badge, .stat-box, .parallax-bg {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.gsap-reveal, .gsap-stagger, .float-anim, .float-anim-delayed, .float-slow,
+.timeline-content-left, .timeline-content-right {
+    will-change: transform, opacity;
 }
