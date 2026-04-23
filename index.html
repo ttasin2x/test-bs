@@ -22,7 +22,10 @@
     
     <link rel="icon" type="image/webp" href="photos/scout-logo.webp">
 
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://www.gstatic.com">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -666,7 +669,7 @@
                     <div class="glass-card-green bg-gray-50 p-8 rounded-2xl hover:-translate-y-2 transition-transform shadow-md">
                         <div class="text-5xl mb-4 float-anim bg-white w-20 h-20 mx-auto rounded-full flex items-center justify-center shadow-sm">🌱</div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2 font-display">সবুজ বাংলাদেশ</h3>
-                        <p class="text-gray-700 text-sm font-medium leading-relaxed">২০৩০ সালের মধ্যে ১০ কোটি গাছ রোপণের লক্ষ্যমাত্রা অর্জন।</p>
+                        <p class="text-gray-700 text-sm font-medium leading-relaxed">২০৩০ সালের মধ্যে ১০ কোটি গাছ পণ্ডিত রোপণের লক্ষ্যমাত্রা অর্জন।</p>
                     </div>
                 </div>
             </div>
@@ -764,11 +767,9 @@
     <script src="script.js" defer></script>
 
     <script type="module">
-        // ফায়ারবেস লাইব্রেরি ইম্পোর্ট
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        // আপনার ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyANTNiaoQ0_NY0dlNNPEvTbue0DO4HtmYM",
             authDomain: "bd-scouts-website.firebaseapp.com",
@@ -780,35 +781,30 @@
             measurementId: "G-5BCLCTB1T0"
         };
 
-        // ফায়ারবেস চালু করা
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         const countRef = ref(db, 'visitorCount');
         const counterElement = document.getElementById('real-visitor-count');
 
-        // ১. রিয়েল-টাইমে ডাটা দেখানো (ডাটাবেজে পরিবর্তন হলেই সাইটে আপডেট হবে)
         onValue(countRef, (snapshot) => {
             const data = snapshot.val();
             if(data) {
-                // সংখ্যাগুলো বাংলায় কনভার্ট করা
                 const finalCountBn = data.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
-                // কমা (,) যুক্ত করা
                 const formattedCount = finalCountBn.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 counterElement.innerHTML = formattedCount;
             }
         });
 
-        // ২. নতুন ভিজিটর আসলে ডাটাবেজে ১ যোগ করা (ট্রানজেকশন মেথড)
         setTimeout(() => {
             runTransaction(countRef, (currentData) => {
                 if (currentData === null) {
-                    return 15977; // যদি ডাটাবেজ খালি থাকে
+                    return 15977; 
                 }
                 return currentData + 1;
             }).catch((error) => {
                 console.error("Counter update failed: ", error);
             });
-        }, 2000); // সাইট লোড হওয়ার ২ সেকেন্ড পর কাউন্ট করবে
+        }, 800);
     </script>
 </body>
 </html>
