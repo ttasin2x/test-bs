@@ -6,11 +6,13 @@ async function loadDynamicContent() {
     } catch (error) {
         console.error('Error loading JSON data:', error);
     } finally {
-        initSiteAnimations();
+        // Initialize animations after rendering
+        setTimeout(initSiteAnimations, 100); 
     }
 }
 
 function renderData(data) {
+    // History
     const historyContainer = document.getElementById('dynamic-history');
     if (historyContainer && data.history) {
         historyContainer.innerHTML = data.history.map((item, index) => {
@@ -39,6 +41,7 @@ function renderData(data) {
         }).join('');
     }
 
+    // Leaders
     const leadersContainer = document.getElementById('dynamic-leaders');
     if (leadersContainer && data.leaders) {
         leadersContainer.innerHTML = data.leaders.map(item => `
@@ -54,6 +57,7 @@ function renderData(data) {
         `).join('');
     }
 
+    // Branches
     const branchesContainer = document.getElementById('dynamic-branches');
     if (branchesContainer && data.branches) {
         branchesContainer.innerHTML = data.branches.map(item => `
@@ -68,6 +72,7 @@ function renderData(data) {
         `).join('');
     }
 
+    // Jamborees
     const jamboreesContainer = document.getElementById('dynamic-jamborees');
     if (jamboreesContainer && data.jamborees) {
         jamboreesContainer.innerHTML = data.jamborees.map(item => `
@@ -80,6 +85,7 @@ function renderData(data) {
         `).join('');
     }
 
+    // Activities
     const renderActivityCard = (item) => `
         <div class="activity-card gsap-stagger group">
             <div class="h-40 overflow-hidden relative cursor-pointer" onclick="openModal('${item.img}')">
@@ -104,9 +110,7 @@ function renderData(data) {
     }
 }
 
-// --------------------------------------------------------
 // Optimized Zero-Lag Cursor Tracker (LERP Method)
-// --------------------------------------------------------
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
 
@@ -114,43 +118,44 @@ let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 let outlineX = mouseX;
 let outlineY = mouseY;
+let isCursorActive = false;
 
-window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
+// Only run cursor animation if not on touch device
+if (window.matchMedia("(pointer: fine)").matches) {
+    isCursorActive = true;
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }, {passive: true});
 
-function renderCursor() {
-    if(cursorDot) {
-        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-    }
-    if(cursorOutline) {
-        outlineX += (mouseX - outlineX) * 0.2;
-        outlineY += (mouseY - outlineY) * 0.2;
-        cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+    function renderCursor() {
+        if(cursorDot) {
+            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+        }
+        if(cursorOutline) {
+            outlineX += (mouseX - outlineX) * 0.2;
+            outlineY += (mouseY - outlineY) * 0.2;
+            cursorOutline.style.transform = `translate3d(${outlineX}px, ${outlineY}px, 0) translate(-50%, -50%)`;
+        }
+        requestAnimationFrame(renderCursor);
     }
     requestAnimationFrame(renderCursor);
-}
-requestAnimationFrame(renderCursor);
 
-document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
-        if(cursorOutline) {
-            cursorOutline.style.width = '50px';
-            cursorOutline.style.height = '50px';
-            cursorOutline.style.backgroundColor = 'rgba(0, 106, 78, 0.1)';
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
+            if(cursorOutline) {
+                cursorOutline.style.width = '50px'; cursorOutline.style.height = '50px'; cursorOutline.style.backgroundColor = 'rgba(0, 106, 78, 0.1)';
+            }
         }
-    }
-});
-document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
-        if(cursorOutline) {
-            cursorOutline.style.width = '40px';
-            cursorOutline.style.height = '40px';
-            cursorOutline.style.backgroundColor = 'transparent';
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest('a, button, .cursor-pointer, .hero-badge')) {
+            if(cursorOutline) {
+                cursorOutline.style.width = '40px'; cursorOutline.style.height = '40px'; cursorOutline.style.backgroundColor = 'transparent';
+            }
         }
-    }
-});
+    });
+}
 
 function openModal(imgSrc) {
     const modal = document.getElementById('imageModal');
@@ -158,12 +163,11 @@ function openModal(imgSrc) {
     if(!modal || !modalImg) return;
     modalImg.src = imgSrc;
     modal.classList.remove('hidden');
-    
-    setTimeout(() => {
+    requestAnimationFrame(() => {
         modal.classList.remove('opacity-0');
         modalImg.classList.remove('scale-95');
         modalImg.classList.add('scale-100');
-    }, 10);
+    });
 }
 
 function closeModal() {
@@ -229,17 +233,14 @@ function initSiteAnimations() {
                 
                 if (typeof gsap !== "undefined") {
                     gsap.to(".hero-element", { 
-                        autoAlpha: 1, 
-                        y: 0, 
-                        duration: 1.2, 
-                        stagger: 0.15, 
-                        ease: "power3.out" 
+                        autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.15, ease: "power3.out" 
                     });
                 }
-            }, 800);
+            }, 500);
         }
-    }, 500);
+    }, 300);
 
+    // Initializing ScrollTriggers
     setTimeout(() => {
         if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
             gsap.registerPlugin(ScrollTrigger);
@@ -285,38 +286,7 @@ function initSiteAnimations() {
     }, 600); 
 }
 
-const scrollArea = document.getElementById('scrollArea');
-function checkHorizontalScroll() {
-    const animElements = document.querySelectorAll('.anim-el');
-    if(!scrollArea || animElements.length === 0) return;
-    const areaRect = scrollArea.getBoundingClientRect();
-    const triggerPoint = areaRect.left + (areaRect.width * 0.85);
-
-    animElements.forEach(el => {
-        const elRect = el.getBoundingClientRect();
-        if (elRect.left < triggerPoint) {
-            el.classList.add('active');
-        } else {
-            el.classList.remove('active');
-        }
-    });
-}
-if(scrollArea){
-    scrollArea.addEventListener('scroll', checkHorizontalScroll);
-    window.addEventListener('resize', checkHorizontalScroll);
-    setTimeout(checkHorizontalScroll, 800);
-}
-
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-if(mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
-}
-
-// --------------------------------------------------------
-// Optimized Global Scroll Listener (requestAnimationFrame)
-// --------------------------------------------------------
+// Optimized Scroll Listener
 let isScrolling = false;
 let pathLength = 0;
 
@@ -326,25 +296,21 @@ window.addEventListener('scroll', () => {
             const winScroll = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             
-            // 1. Line Progress Bar
             const progress = document.getElementById('progressBar');
             if(progress) progress.style.width = ((winScroll / height) * 100) + '%';
             
-            // 2. Back To Top Button
             const backToTop = document.getElementById('backToTop');
             if(backToTop) {
                 if (winScroll > 400) backToTop.classList.remove('opacity-0', 'pointer-events-none');
                 else backToTop.classList.add('opacity-0', 'pointer-events-none');
             }
             
-            // 3. Navbar Sticky Shadow
             const navbar = document.getElementById('navbar');
             if(navbar) {
                 if (winScroll > 30) { navbar.classList.add('shadow-md'); }
                 else { navbar.classList.remove('shadow-md'); }
             }
 
-            // 4. Circular Progress Ring
             const progressWrap = document.getElementById('progress-wrap');
             const progressPath = document.querySelector('.progress-circle path');
             if (progressWrap && progressPath && pathLength > 0) {
@@ -358,12 +324,11 @@ window.addEventListener('scroll', () => {
                     progressWrap.classList.add('opacity-0', 'pointer-events-none');
                 }
             }
-            
             isScrolling = false;
         });
         isScrolling = true;
     }
-});
+}, {passive: true});
 
 const backToTopBtn = document.getElementById('backToTop');
 if(backToTopBtn) backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -418,12 +383,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-    loadDynamicContent(); // Load content on ready
+    loadDynamicContent();
 
-    // Initialize Circular Progress Ring Length
     const progressWrap = document.getElementById('progress-wrap');
     const progressPath = document.querySelector('.progress-circle path');
-    
     if (progressWrap && progressPath) {
         pathLength = progressPath.getTotalLength();
         progressPath.style.strokeDasharray = `${pathLength} ${pathLength}`;
@@ -431,7 +394,6 @@ window.addEventListener('DOMContentLoaded', () => {
         progressWrap.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // Interactive Map Tooltip Logic
     const hotspots = document.querySelectorAll('.region-hotspot');
     const tooltip = document.getElementById('map-tooltip');
     const tooltipName = document.getElementById('tooltip-name');
@@ -440,24 +402,24 @@ window.addEventListener('DOMContentLoaded', () => {
     if(hotspots.length > 0 && tooltip) {
         hotspots.forEach(spot => {
             spot.addEventListener('mouseenter', () => {
-                const name = spot.getAttribute('data-name');
-                const count = spot.getAttribute('data-count');
-                
-                tooltipName.textContent = name;
-                tooltipCount.textContent = count;
+                tooltipName.textContent = spot.getAttribute('data-name');
+                tooltipCount.textContent = spot.getAttribute('data-count');
                 tooltip.classList.remove('hidden');
                 
-                // Position Tooltip dynamically
                 const rect = spot.getBoundingClientRect();
                 const containerRect = spot.parentElement.getBoundingClientRect();
                 
                 tooltip.style.left = `${rect.left - containerRect.left + (rect.width / 2)}px`;
                 tooltip.style.top = `${rect.top - containerRect.top}px`;
             });
-            
-            spot.addEventListener('mouseleave', () => {
-                tooltip.classList.add('hidden');
-            });
+            spot.addEventListener('mouseleave', () => tooltip.classList.add('hidden'));
         });
     }
 });
+
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if(mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    document.querySelectorAll('.mobile-link').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
+}
